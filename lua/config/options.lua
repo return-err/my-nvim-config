@@ -10,7 +10,7 @@ opt.cursorline = true         -- 高亮當前行
 -- 縮進（Go 規範預設習慣：Tab 寬度為 4）
 opt.tabstop = 4               -- 1 個 Tab 等於 4 個空格
 opt.shiftwidth = 4            -- 自動縮進寬度
-opt.expandtab = true         -- 保留真實 Tab（Go 官方規章；若寫其他語言可由 ftplugin 覆蓋）
+opt.expandtab = true         -- Tab 轉空白（若需要可由 ftplugin 覆蓋）
 opt.smartindent = true        -- 智慧型自動縮進
 
 -- 搜尋與剪貼簿
