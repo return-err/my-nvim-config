@@ -1,20 +1,33 @@
 return {
   {
-    "romus204/tree-sitter-manager.nvim",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    "nvim-treesitter/nvim-treesitter",
+    lazy = false,
+    build = ":TSUpdate",
     config = function()
-      require("tree-sitter-manager").setup({
-        -- 指定需要的 Parser
-        ensure_installed = { "lua", "vim", "vimdoc", "python", "javascript", "typescript", "json", "markdown" },
+      -- 安裝需要的 Parser 和 Query
+      require("nvim-treesitter").install({
+        "lua",
+        "vim",
+        "vimdoc",
+        "python",
+        "javascript",
+        "typescript",
+        "json",
+        "markdown",
+        "go",
+        "gomod",
       })
 
-      -- 啟用 Neovim 原生 Tree-sitter 語法高亮
+      -- 啟用 Tree-sitter 語法高亮
       vim.api.nvim_create_autocmd("FileType", {
-        group = vim.api.nvim_create_augroup("vim-treesitter-start", { clear = true }),
-        callback = function()
-          pcall(vim.treesitter.start)
+        group = vim.api.nvim_create_augroup(
+          "vim-treesitter-start",
+          { clear = true }
+        ),
+        callback = function(args)
+          pcall(vim.treesitter.start, args.buf)
         end,
       })
     end,
   },
-} 
+}
